@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 app.set('port', 8081);
 
 app.post('/fetch_pdf', Route.fetchPdf);
+app.get('/pdf/:name', Route.downloadPdf);
 
 http.createServer(app).listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
