@@ -5,7 +5,6 @@
   "scripts": {
     "postinstall": "npm run typings-install && npm run build",
     "build": "node ./node_modules/webpack/bin/webpack --colors --progress --display-error-details -p --config webpack.server.config.js",
-    "build:prod": "npm run build && cd server && npm install",
     "prestart": "npm run build",
     "start": "cd server && node server.js",
     "clean": "node ./node_modules/rimraf/bin server target Logs",
