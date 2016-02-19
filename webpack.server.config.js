@@ -18,6 +18,10 @@ module.exports = {
     'render': './src/render.ts'
   },
   target: 'node',
+  node: {
+    __filename: false,
+    __dirname: false
+  },
   output: {
     path: path.join(__dirname, 'server'),
     filename: '[name].js'

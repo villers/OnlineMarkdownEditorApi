@@ -31,4 +31,22 @@ export class Markdown {
     };
     return md.render(text);
   }
+
+  static getFullHtml(name, str) {
+    return `<!DOCTYPE html>
+              <html>
+                <head>
+                  <meta charset="utf-8">
+                  <title>${name}</title>
+                  <style>
+                    ${require('!raw-loader!highlight.js/styles/github.css')}
+                    ${require('!raw-loader!stylus-loader!./preview.styl')}
+                    img { max-width: 35%; }
+                  </style>
+                </head>
+                <body id="preview">
+                 ${Markdown.Transform(str)}
+               </body>
+             </html>`;
+  }
 }
