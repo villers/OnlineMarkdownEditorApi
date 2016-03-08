@@ -1,15 +1,17 @@
 declare var phantom: any;
-var page: any = require('webpage').create();
-var system: any = require('system');
+
+var webpage = require('webpage');
+var system = require('system');
+var page = webpage.create();
 var address: string;
 var output: string;
 
 address = system.args[1];
 output = system.args[2];
 page.viewportSize = { width: 1024, height: 768 };
-page.paperSize = { format: 'A4', orientation: 'portrait', margin: '1cm' };
+page.paperSize = { format: 'A4', orientation: 'portrait', margin: '1cm', border: '0px' };
 
-page.open(address, function (status) {
+page.open(address, function (status: string): void {
   if (status !== 'success') {
     console.log('Unable to load the address!');
     console.log(status);

@@ -1,5 +1,5 @@
-var hljs: any = require('highlight.js');
-var MarkdownIt: any = require('markdown-it');
+import hljs = require('highlight.js');
+var MarkdownIt = require('markdown-it');
 
 export class Markdown {
   static Transform(text: string): string {
@@ -26,13 +26,12 @@ export class Markdown {
       .use(require('markdown-it-checkbox'))
       .use(require('markdown-it-emoji'));
 
-    md.renderer.rules.table_open = function () {
-      return '<table class="table table-striped">\n';
-    };
+    md.renderer.rules.table_open = () => '<table class="table table-striped">\n';
+
     return md.render(text);
   }
 
-  static getFullHtml(name, str) {
+  static getFullHtml(name: string, str: string) {
     return `<!DOCTYPE html>
               <html>
                 <head>

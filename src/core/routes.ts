@@ -1,23 +1,26 @@
-var fs: any = require('fs');
-var child = require('child_process');
-var phantomjs = require('phantomjs-prebuilt');
+import child = require('child_process');
+import mkdirp = require('mkdirp');
 
+import {Request, Response} from 'express';
 import {Markdown} from './markdown';
+import {Files} from './Files';
 
+var phantomjs = require('phantomjs');
+var web = require('express-decorators');
 
-function fileExist(fullpath: string) {
-  try {
-    return fs.statSync(fullpath).isFile();
-  } catch (e) {
-    return false;
-  }
-}
-
+@web.controller('/')
 export class Route {
 
-  static fetchPdf(req: any, res: any) {
+  constructor() {
+    mkdirp('./downloads/pdf', null, null);
+    mkdirp('./downloads/html', null, null);
+    mkdirp('./downloads/md', null, null);
+  }
+
+  @web.post('/fetch_pdf')
+  public fetchPdf(req: Request, res: Response) {
     if (req.body.unmd === undefined || req.body.name === undefined) {
-      return  res.json({
+      res.json({
         error: 'The input are empty.'
       });
     }
@@ -27,10 +30,10 @@ export class Route {
     var tmpHtml: string = `./downloads/html/${name}.html`;
     var tmpPdf: string = `./downloads/pdf/${name}.pdf`;
 
-    fs.writeFile(tmpHtml, Markdown.getFullHtml(name, unmd), 'utf8', (err: any, data: any) => {
-      child.execFile(phantomjs.path, [ 'render.js', tmpHtml, tmpPdf ], (err: any, stdout: any, stderr: any) => {
-        if (fileExist(tmpHtml) && fileExist(tmpPdf)) {
-          fs.unlink(tmpHtml);
+    Files.Write(tmpHtml, Markdown.getFullHtml(name, unmd), 'utf8', (err: NodeJS.ErrnoException) => {
+      child.execFile(phantomjs.path, [ 'render.js', tmpHtml, tmpPdf ], (error: Error, stdout: Buffer, stderr: Buffer) => {
+        if (Files.Exist(tmpHtml) && Files.Exist(tmpPdf)) {
+          Files.Delete(tmpHtml);
           res.json({
             name: `${name}.pdf`,
             type: 'pdf'
@@ -42,13 +45,14 @@ export class Route {
     });
   }
 
-  static downloadPdf(req: any, res: any) {
+  @web.get('/pdf/:name')
+  public downloadPdf(req: Request, res: Response) {
     var name: string = req.params.name.trim();
     var tmpPdf: string = `./downloads/pdf/${name}`;
 
-    if (fileExist(tmpPdf)) {
+    if (Files.Exist(tmpPdf)) {
       res.download(tmpPdf, name, (err: any) => {
-        fs.unlink(tmpPdf);
+        Files.Delete(tmpPdf);
       });
     } else {
       res.status(500).send('Cant download pdf file!');

@@ -18,6 +18,7 @@
     "cors": "^2.7.1",
     "css-loader": "^0.23.1",
     "express": "^4.13.4",
+    "express-decorators": "^0.3.0",
     "file-loader": "^0.8.5",
     "highlight.js": "^9.1.0",
     "json-loader": "^0.5.4",

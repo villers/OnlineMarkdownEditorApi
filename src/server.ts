@@ -1,25 +1,20 @@
 'use strict';
 
-var express: any = require('express');
-var http: any = require('http');
-var app: any = express();
-var cors = require('cors');
-var bodyParser: any = require('body-parser');
-var mkdirp = require('mkdirp');
+import express = require('express');
+import http = require('http');
+import cors = require('cors');
+import bodyParser = require('body-parser');
 
 import {Route} from './core/routes';
 
-mkdirp('./downloads/pdf');
-mkdirp('./downloads/html');
-mkdirp('./downloads/md');
-
+var app = express();
+app.set('port', 8081);
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.set('port', 8081);
 
-app.post('/fetch_pdf', Route.fetchPdf);
-app.get('/pdf/:name', Route.downloadPdf);
+let RouteController: any = new Route();
+RouteController.register(app);
 
 http.createServer(app).listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
