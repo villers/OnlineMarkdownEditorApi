@@ -16,4 +16,8 @@ export class Files {
   static Delete(fullpath: string): void {
     fs.unlink(fullpath);
   }
+
+  static NameIsBad(name: string): boolean {
+    return (!/^[0-9a-zA-Z\.\-_\s]+$/im.test(name));
+  }
 }
