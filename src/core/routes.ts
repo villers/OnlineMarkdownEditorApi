@@ -5,7 +5,7 @@ import {Request, Response} from 'express';
 import {Markdown} from './markdown';
 import {Files} from './Files';
 
-var phantomjs = require('phantomjs');
+var phantomjs = require('phantomjs-prebuilt');
 var web = require('express-decorators');
 
 @web.controller('/')

@@ -1,7 +1,7 @@
 {
   "name": "MarkdownApi",
   "version": "1.0.0",
-  "license": "MIT",
+  "private": "true",
   "scripts": {
     "postinstall": "npm run typings-install && npm run build",
     "build": "node ./node_modules/webpack/bin/webpack --colors --progress --display-error-details -p --config webpack.server.config.js",
