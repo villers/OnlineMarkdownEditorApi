@@ -20,4 +20,8 @@ export class Files {
   static NameIsBad(name: string): boolean {
     return (!/^[0-9a-zA-Z\.\-_\s]+$/im.test(name));
   }
+
+  static ReadJson(name: string): any {
+    return JSON.parse(fs.readFileSync(name, 'utf8'));
+  }
 }

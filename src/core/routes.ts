@@ -3,7 +3,7 @@ import mkdirp = require('mkdirp');
 
 import {Request, Response} from 'express';
 import {Markdown} from './markdown';
-import {Files} from './Files';
+import {Files} from './files';
 
 var phantomjs = require('phantomjs-prebuilt');
 var web = require('express-decorators');

@@ -1,8 +1,13 @@
 {
   "name": "MarkdownApi",
   "version": "1.0.0",
-  "description": "",
+  "author": "Mickael VILLERS <mvillers@cegid.fr>",
+  "private": "true",
   "main": "server.js",
+  "description": "Server for convert MArkdown to PDF",
+  "config": {
+    "port": "8083"
+  },
   "dependencies": {
     "body-parser": "^1.15.0",
     "cors": "^2.7.1",
@@ -29,7 +34,5 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
-  },
-  "author": "",
-  "license": "ISC"
+  }
 }

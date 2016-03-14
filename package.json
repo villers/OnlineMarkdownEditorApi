@@ -1,17 +1,9 @@
 {
   "name": "MarkdownApi",
   "version": "1.0.0",
+  "author": "Mickael VILLERS <mvillers@cegid.fr>",
   "private": "true",
-  "scripts": {
-    "postinstall": "npm run typings-install && npm run build",
-    "build": "node ./node_modules/webpack/bin/webpack --colors --progress --display-error-details -p --config webpack.server.config.js",
-    "prestart": "npm run build",
-    "start": "cd server && node server.js",
-    "clean": "node ./node_modules/rimraf/bin server target Logs",
-    "docs": "node ./node_modules/typedoc/bin/typedoc --options typedoc.json --includeDeclarations typings/browser.d.ts src",
-    "typings-install": "typings install",
-    "typings-install-e": "typings install --ambient --save"
-  },
+  "description": "Server for convert MArkdown to PDF",
   "dependencies": {
     "body-parser": "^1.15.0",
     "copy-webpack-plugin": "^1.1.1",
@@ -50,5 +42,15 @@
     "typings": "^0.6.8",
     "webpack": "^1.12.13",
     "webpage": "^0.3.0"
+  },
+  "scripts": {
+    "postinstall": "npm run typings-install && npm run build",
+    "build": "node ./node_modules/webpack/bin/webpack --colors --progress --display-error-details -p --config webpack.server.config.js",
+    "prestart": "npm run build",
+    "start": "cd server && node server.js",
+    "clean": "node ./node_modules/rimraf/bin server target Logs",
+    "docs": "node ./node_modules/typedoc/bin/typedoc --options typedoc.json --includeDeclarations typings/browser.d.ts src",
+    "typings-install": "typings install",
+    "typings-install-e": "typings install --ambient --save"
   }
 }
