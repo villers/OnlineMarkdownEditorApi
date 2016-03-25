@@ -1,7 +1,7 @@
 {
   "name": "MarkdownApi",
   "version": "1.0.0",
-  "author": "Mickael VILLERS <mvillers@cegid.fr>",
+  "author": "Mickael VILLERS <villers.mickael@gmail.com>",
   "private": "true",
   "description": "Server for convert MArkdown to PDF",
   "dependencies": {
